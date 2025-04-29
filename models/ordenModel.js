@@ -1,5 +1,5 @@
 // models/ordenModel.js
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 export async function getAllOrdenes() {
   const res = await pool.query('SELECT * FROM Orden ORDER BY orden_id');
   return res.rows;

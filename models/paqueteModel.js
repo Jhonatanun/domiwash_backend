@@ -1,5 +1,5 @@
 // models/paqueteModel.js
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 export async function getAllPaquetes() {
   const res = await pool.query('SELECT * FROM PaqueteServicio ORDER BY paquete_id');
   return res.rows;

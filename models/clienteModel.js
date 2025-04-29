@@ -1,5 +1,5 @@
 // models/clienteModel.js
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 export async function getAllClientes() {
   const res = await pool.query('SELECT * FROM Cliente ORDER BY cliente_id');
   return res.rows;

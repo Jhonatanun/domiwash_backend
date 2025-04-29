@@ -1,5 +1,5 @@
 // models/vehiculoModel.js
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 export async function getAllVehiculos() {
   const res = await pool.query('SELECT * FROM Vehiculo ORDER BY vehiculo_id');
   return res.rows;

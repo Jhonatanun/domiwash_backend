@@ -1,5 +1,5 @@
 // models/pagoModel.js
-import { pool } from '../db.js';
+import { pool } from '../config/db.js';
 export async function getAllPagos() {
   const res = await pool.query('SELECT * FROM Pago ORDER BY pago_id');
   return res.rows;
