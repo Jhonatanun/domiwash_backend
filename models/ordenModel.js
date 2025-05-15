@@ -10,13 +10,23 @@ export async function getOrdenById(id) {
 }
 export async function createOrden(data) {
   const { cliente_id, paquete_id, washer_id, fecha_hora, direccion, estado } = data;
+
+  const now = new Date();
+  const fechaOrden = new Date(fecha_hora);
+
+  if (fechaOrden <= now) {
+    throw new Error("La fecha y hora deben ser posteriores al momento actual");
+  }
+
   const res = await pool.query(
     `INSERT INTO Orden (cliente_id,paquete_id,washer_id,fecha_hora,direccion,estado)
      VALUES($1,$2,$3,$4,$5,COALESCE($6,'pendiente')) RETURNING *`,
     [cliente_id, paquete_id, washer_id, fecha_hora, direccion, estado]
   );
+
   return res.rows[0];
 }
+
 export async function updateOrden(id, data) {
   const { washer_id, fecha_hora, direccion, estado } = data;
   const res = await pool.query(

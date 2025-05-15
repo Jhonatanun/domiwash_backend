@@ -1,31 +1,31 @@
-// models/paqueteModel.js
+// models/lavadorModel.js
 import { pool } from '../config/db.js';
-export async function getAllPaquetes() {
-  const res = await pool.query('SELECT * FROM PaqueteServicio ORDER BY paquete_id');
+export async function getAllLavadores() {
+  const res = await pool.query('SELECT * FROM Lavador ORDER BY washer_id');
   return res.rows;
 }
-export async function getPaqueteById(id) {
-  const res = await pool.query('SELECT * FROM PaqueteServicio WHERE paquete_id=$1', [id]);
+export async function getLavadorById(id) {
+  const res = await pool.query('SELECT * FROM Lavador WHERE washer_id=$1', [id]);
   return res.rows[0];
 }
-export async function createPaquete(data) {
-  const { nombre, descripcion, precio } = data;
+export async function createLavador(data) {
+  const { nombre, telefono, disponibilidad } = data;
   const res = await pool.query(
-    `INSERT INTO PaqueteServicio (nombre,descripcion,precio)
+    `INSERT INTO Lavador (nombre,telefono,disponibilidad)
      VALUES($1,$2,$3) RETURNING *`,
-    [nombre, descripcion, precio]
+    [nombre, telefono, disponibilidad]
   );
   return res.rows[0];
 }
-export async function updatePaquete(id, data) {
-  const { nombre, descripcion, precio } = data;
+export async function updateLavador(id, data) {
+  const { nombre, telefono, disponibilidad } = data;
   const res = await pool.query(
-    `UPDATE PaqueteServicio SET nombre=$1,descripcion=$2,precio=$3
-     WHERE paquete_id=$4 RETURNING *`,
-    [nombre, descripcion, precio, id]
+    `UPDATE Lavador SET nombre=$1,telefono=$2,disponibilidad=$3
+     WHERE washer_id=$4 RETURNING *`,
+    [nombre, telefono, disponibilidad, id]
   );
   return res.rows[0];
 }
-export async function deletePaquete(id) {
-  await pool.query('DELETE FROM PaqueteServicio WHERE paquete_id=$1', [id]);
+export async function deleteLavador(id) {
+  await pool.query('DELETE FROM Lavador WHERE washer_id=$1', [id]);
 }
